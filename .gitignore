@@ -1,0 +1,7 @@
+# IDEs
+.idea
+
+*.pyc
+
+# sqlite file
+db.sqlite3

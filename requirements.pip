@@ -1,0 +1,4 @@
+Django==2.1.7
+djangorestframework==3.9.1
+grako==3.99.9
+pytz==2018.9
