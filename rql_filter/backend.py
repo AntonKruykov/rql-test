@@ -1,8 +1,7 @@
 from django.conf import settings
 from rest_framework.filters import BaseFilterBackend
 
-from rql_filter.parser.parser import RQLParser
-from rql_filter.parser.semantics import RQLSemantics
+from rql_filter.parser import create_django_orm_condition, parse_rql
 
 
 class RQLFilterBackend(BaseFilterBackend):
@@ -14,7 +13,6 @@ class RQLFilterBackend(BaseFilterBackend):
     name of the querystring parameter used.
     """
 
-    parser = RQLParser(semantics=RQLSemantics(), whitespace='')
     query_param = getattr(settings, 'RQL_FILTER_QUERY_PARAM', 'q')
 
     def filter_queryset(self, request, queryset, view):
@@ -22,7 +20,11 @@ class RQLFilterBackend(BaseFilterBackend):
 
         if self.query_param in request.GET:
             if len(request.GET[self.query_param]):
-                condition = self.parser.parse(request.GET[self.query_param])
+
+                condition = create_django_orm_condition(
+                    parse_rql(request.GET[self.query_param])
+                )
+
                 qs = qs.filter(condition)
 
         return qs
