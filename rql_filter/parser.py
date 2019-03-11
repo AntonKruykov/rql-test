@@ -5,7 +5,7 @@ from pyparsing import ZeroOrMore, Literal, Word, alphas, alphanums, Group, \
 
 """
 Грамматика поддерживает: 
-- Сравниения == != < > <= >= 
+- Сравниения == != < > <= >= in
 - Логические И, ИЛИ
 - Скобки и вложенность
 """
