@@ -16,16 +16,7 @@ docker-compose up runserver
 [http://0.0.0.0:8000/users/?q=(first_name==%22Kruykov1%22),id=lt=30;last_name==Kruykov](http://0.0.0.0:8000/users/?q=(first_name==%22Kruykov1%22),id=lt=30;last_name==Kruykov)
 
 ### Пояснения
-1. В первую очередь я попробовал примерить пакет 
-https://pypi.org/project/django-rql-filter/.
-По описанию он отлично подходил. Но как выяснилось, он для python2. Поэтому я 
-скопировал его код в проект 
-https://github.com/AntonKruykov/rql-test/tree/master/rql_filter, 
-адаптировал под python3 и использовал.
-Если этот пакет будет применяться, то логическое продолжение истории будет 
-выложить эту адаптацию в pypi. 
-Правда пришлось немного подправить код, чтобы он заработал, поэтому прежде 
-чем выкладывать, необходимо написать полноценные тесты. 
+1. Написал парсер используя пакет pyparsing. 
 2. В Django параметры url разбиваются по '&' и ';'. А в RQL ';' - логическое AND.
 Поэтому пришлось сделать 
 [манки-патчинг](https://github.com/AntonKruykov/rql-test/blob/master/rql_test/settings.py#L128).
